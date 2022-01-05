@@ -26,4 +26,4 @@ Puedes comunicarte conmigo mediante mi email:
 
 ## Licencia
 
-GNU Public Licence
+[GNU Public License](LICENSE.txt)
