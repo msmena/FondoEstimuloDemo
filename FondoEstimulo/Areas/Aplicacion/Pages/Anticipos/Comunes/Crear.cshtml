@@ -1,0 +1,55 @@
+﻿@page
+@model FondoEstimulo.Areas.Aplicacion.Pages.Anticipos.Comunes.CreateModel
+
+@{
+    ViewData["Title"] = "Nuevo registro - Anticipos";
+}
+
+<h2 class="text-primary">
+    Anticipos<small class="text-muted"> - Agentes comunes - Nuevo registro -</small>
+</h2>
+<hr />
+<div class="row">
+    <div class="col">
+        <form method="post">
+            @{
+                if (!String.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <p class="alert alert-danger">@Model.ErrorMessage</p>
+                }
+            }
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="form-group row">
+                    <label asp-for="Anticipo.Periodo" class="control-label col-sm-3">
+                        @Html.DisplayNameFor(model => model.Anticipo.Periodo):
+                    </label>
+                    <div class="col-sm-9">
+                        <input asp-for="Anticipo.Periodo" class="form-control" placeholder="01/01/1990" />
+                        <span asp-validation-for="Anticipo.Periodo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Anticipo.AgenteID" class="control-label col-sm-3">
+                        @Html.DisplayNameFor(model => model.Anticipo.AgenteID):
+                    </label>
+                    <div class="col-sm-9">
+                        <select asp-for="Anticipo.AgenteID" class="form-control" asp-items="@Model.AgenteNameSL">
+                            <option value="">-- Seleccionar agente --</option>
+                        </select>
+                        <a asp-page="Agentes/Crear" class="btn btn-outline-primary btn-sm mt-2">Crear nuevo agente</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Agregar" class="btn btn-primary"><i class="bi-plus-square mr-2"></i>Agregar</button>
+                <button type="reset" value="Limpiar" class="btn btn-sm btn-outline-primary"><i class="bi-recycle mr-2"></i>Limpiar</button>
+                <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,267 @@
+﻿@page "{indicepagina=1}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Anticipos.Funcionarios.IndexModel
+
+@{
+    ViewData["Title"] = "Listado - Anticipos";
+}
+
+<h2 class="text-primary">
+    Anticipos<small class="text-muted"> - Agentes funcionarios - Listado -</small>
+</h2>
+<p>
+    <a asp-page="Crear" class="btn btn-outline-primary btn-sm"><i class="bi-plus-square mr-2"></i>Nuevo registro</a>
+</p>
+<div class="card border-secondary p-1" style="font-size: small">
+    <div class="card-header">
+        <a href="#card-body-cb1" data-toggle="collapse" class="card-link">
+            <i class="bi-arrow-down-up"></i>
+            Filtros
+        </a>
+    </div>
+    <div id="card-body-cb1" class="card-body collapse">
+        <form asp-page="./Listado" method="get">
+            <fieldset>
+                <input type="hidden" name="ordenCampo" value="@Model.OrdenCampo" />
+                <div class="form-group row p-0 m-0 pt-2">
+                    <label class="col-form-label col-sm-2">@Html.DisplayNameFor(model => model.Anticipos[0].Periodo) desde: </label>
+                    <div class="col-sm-4">
+                        <input type="month" asp-for="FPeriodoDesde" class="form-control-sm" />
+                    </div>
+                    <label class="col-form-label col-sm-2">@Html.DisplayNameFor(model => model.Anticipos[0].Periodo) hasta: </label>
+                    <div class="col-sm-4">
+                        <input type="month" asp-for="FPeriodoHasta" class="form-control-sm" />
+                    </div>
+                </div>
+                <div class="form-group row p-0 m-0">
+                    <label class="col-form-label col-sm-2"> @Html.DisplayNameFor(model => model.Anticipos[0].Agente.DNI): </label>
+                    <div class="col-sm-4">
+                        <input asp-for="FDNI" placeholder="123456" class="form-control-sm" />
+                    </div>
+                    <label class="col-form-label col-sm-2">@Html.DisplayNameFor(model => model.Anticipos[0].Agente.Nombre): </label>
+                    <div class="col-sm-4">
+                        <input asp-for="FNombre" placeholder="Texto" class="form-control-sm" />
+                    </div>
+                </div>
+                <div class="form-group row p-0 m-0">
+                    <label class="col-form-label col-sm-2">@Html.DisplayNameFor(model => model.Anticipos[0].Escalafon): </label>
+                    <div class="col-sm-4">
+                        <input asp-for="FEscalafon" placeholder="Texto" class="form-control-sm" />
+                    </div>
+                </div>
+                <div class="form-group row p-0 m-0 mt-2">
+                    <div class="col-12 text-right">
+                        <button type="submit" value="Aplicar" class="btn btn-primary mr-sm-2">
+                            <i class="bi-funnel mr-2"></i>Aplicar
+                        </button>
+                        <a asp-page="./Listado" class="btn btn-outline-primary btn-sm mr-sm-2">
+                            <i class="bi-recycle mr-2"></i>Limpiar
+                        </a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<br />
+@{
+    string sPeriodoDesdeAno = Model.FPeriodoDesde.HasValue ? Model.FPeriodoDesde.Value.Year.ToString() : "";
+    string sPeriodoDesdeMes = Model.FPeriodoDesde.HasValue ? Model.FPeriodoDesde.Value.Month.ToString() : "";
+    string sPeriodoHastaAno = Model.FPeriodoHasta.HasValue ? Model.FPeriodoHasta.Value.Year.ToString() : "";
+    string sPeriodoHastaMes = Model.FPeriodoHasta.HasValue ? Model.FPeriodoHasta.Value.Month.ToString() : "";
+    string sDNI = Model.FDNI.HasValue ? Model.FDNI.Value.ToString() : "";
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <caption>Listado de anticipos</caption>
+        <thead class="thead-light text-center">
+            <tr>
+                <th>
+                    @{
+                        string ordenCampoPeriodo = !String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Equals("Periodo") ? "Periodo_desc" : "Periodo";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoPeriodo" class="text-decoration-none" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                       asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-fDni="@sDNI" asp-route-fNombre="@Model.FNombre"
+                       asp-route-fEscalafon="@Model.FEscalafon">
+                        @Html.DisplayNameFor(model => model.Anticipos[0].Periodo)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("Periodo"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <i class="bi-sort-down-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="bi-sort-down"></i>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @{
+                        string ordenCampoDNI = !String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Equals("Agente__DNI") ? "Agente__DNI_desc" : "Agente__DNI";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoDNI" class="text-decoration-none" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                       asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-fDni="@sDNI" asp-route-fNombre="@Model.FNombre"
+                       asp-route-fEscalafon="@Model.FEscalafon">
+                        @Html.DisplayNameFor(model => model.Anticipos[0].Agente.DNI)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("Agente__DNI"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <i class="bi-sort-down-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="bi-sort-down"></i>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @{
+                        string ordenCampoNombre = !String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Equals("Agente__Nombre") ? "Agente__Nombre_desc" : "Agente__Nombre";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoNombre" class="text-decoration-none" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                       asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-fDni="@sDNI" asp-route-fNombre="@Model.FNombre"
+                       asp-route-fEscalafon="@Model.FEscalafon">
+                        @Html.DisplayNameFor(model => model.Anticipos[0].Agente.Nombre)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("Agente__Nombre"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <i class="bi-sort-down-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="bi-sort-down"></i>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Anticipos[0].FondoEstimulo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Anticipos[0].AñosAntiguedad)
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Anticipos.Count > 0)
+            {
+                foreach (var item in Model.Anticipos)
+                {
+            <tr>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.Periodo)
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.Agente.DNI)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Agente.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FondoEstimulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AñosAntiguedad)
+                </td>
+                <td class="text-center align-middle">
+                    <div class="btn-group" style="border-radius:0">
+                        <a asp-page="./Detalles" asp-route-id="@item.AnticipoID" class="btn btn-outline-primary btn-sm"
+                           data-toggle="tooltip" title="Detalles">
+                            <i class="bi-journal-text" style="font-size: 1rem;"></i>
+                        </a>
+                        <a asp-page="./Editar" asp-route-id="@item.AnticipoID" class="btn btn-outline-primary btn-sm"
+                           data-toggle="tooltip" title="Editar">
+                            <i class="bi-journal-check" style="font-size: 1rem;"></i>
+                        </a>
+                    </div>
+                    <a asp-page="./Eliminar" asp-route-id="@item.AnticipoID" class="btn btn-outline-danger btn-sm"
+                       data-toggle="tooltip" title="Eliminar">
+                        <i class="bi-journal-x" style="font-size: 1rem;"></i>
+                    </a>
+                </td>
+            </tr>
+                }
+            }
+            else
+            {
+                <tr class="text-center">
+                    <td colspan="6">No se encontraron registros.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@{
+    var prevDisabled = !Model.Anticipos.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Anticipos.HasNextPage ? "disabled" : "";
+}
+
+<div class="row p-0 m-0 align-items-md-center">
+    <div class="col pl-2 small text-muted">
+        <p>Mostrando @Model.Anticipos.RecordsFrom hasta @Model.Anticipos.RecordsTo de un total de @Model.Anticipos.RecordsTotal registros</p>
+    </div>
+    <div class="col text-center align-middle">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @prevDisabled">
+                <a asp-page="./Listado" asp-route-indicePagina="1" class="page-link" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                   asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-fDni="@sDNI" asp-route-fNombre="@Model.FNombre"
+                   asp-route-fEscalafon="@Model.FEscalafon" asp-route-OrdenCampo="@Model.OrdenCampo" data-toggle="tooltip" title="Primero">
+                    <i class="bi-chevron-double-left"></i>
+                </a>
+            </li>
+            <li class="page-item @prevDisabled">
+                <a asp-page="./Listado" asp-route-indicePagina="@(Model.Anticipos.PageIndex - 1)" class="page-link" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                   asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-fDni="@sDNI" asp-route-fNombre="@Model.FNombre"
+                   asp-route-fEscalafon="@Model.FEscalafon" asp-route-OrdenCampo="@Model.OrdenCampo" data-toggle="tooltip" title="Anterior">
+                    <i class="bi-chevron-left"></i>
+                </a>
+            </li>
+            @{ for (int i = Model.Anticipos.StartPage; i <= Model.Anticipos.EndPage; i++)
+               {
+                    if (Model.Anticipos.PageIndex == i)
+                    {
+                        <li class="page-item active">
+                            <a asp-page="./Listado" class="btn-sm page-link" asp-route-indicePagina=@i asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                               asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-fDni="@sDNI" asp-route-fNombre="@Model.FNombre"
+                               asp-route-fEscalafon="@Model.FEscalafon" asp-route-OrdenCampo="@Model.OrdenCampo">
+                                @i
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a asp-page="./Listado" class="btn-sm page-link" asp-route-indicePagina=@i asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                               asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-fDni="@sDNI" asp-route-fNombre="@Model.FNombre"
+                               asp-route-fEscalafon="@Model.FEscalafon" asp-route-OrdenCampo="@Model.OrdenCampo">
+                                @i
+                            </a>
+                        </li>
+                    }
+               }
+            }
+            <li class="page-item @nextDisabled">
+                <a asp-page="./Listado" asp-route-indicePagina="@(Model.Anticipos.PageIndex + 1)" class="page-link" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                   asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-fDni="@sDNI" asp-route-fNombre="@Model.FNombre"
+                   asp-route-fEscalafon="@Model.FEscalafon" asp-route-OrdenCampo="@Model.OrdenCampo" data-toggle="tooltip" title="Siguiente">
+                    <i class="bi-chevron-right"></i>
+                </a>
+            </li>
+            <li class="page-item @nextDisabled">
+                <a asp-page="./Listado" asp-route-indicePagina="@Model.Anticipos.TotalPages" class="page-link" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                   asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-fDni="@sDNI" asp-route-fNombre="@Model.FNombre"
+                   asp-route-fEscalafon="@Model.FEscalafon" asp-route-OrdenCampo="@Model.OrdenCampo" data-toggle="tooltip" title="Ultimo">
+                    <i class="bi-chevron-double-right"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

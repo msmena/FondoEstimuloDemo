@@ -1,0 +1,144 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using FondoEstimulo.Models.Aplicacion
+
+@inject SignInManager<Usuario> SignInManager
+@inject UserManager<Usuario> UserManager
+
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+
+    string paginaActiva = ($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}");
+    bool paginaPrincipal = true;
+    bool paginaEscalafon = paginaActiva.Contains("/Escalafon/");
+    bool paginaAgente = paginaActiva.Contains("/Agentes/");
+    bool paginaAnticipo = paginaActiva.Contains("/Anticipos/");
+    bool paginaProceso = paginaActiva.Contains("/Procesos/");
+    bool paginaParametro = paginaActiva.Contains("/Parametros/");
+    bool paginaUsuario = paginaActiva.Contains("/Usuarios/");
+    bool paginaError = paginaActiva.Contains("Error");
+    paginaPrincipal = !(paginaEscalafon || paginaAgente || paginaAnticipo || paginaProceso || paginaParametro || paginaUsuario);
+
+    var paginaPrincipalActive = paginaPrincipal ? "active" : "";
+    var paginaEscalafonActive = paginaEscalafon ? "active" : "";
+    var paginaAgenteActive = paginaAgente ? "active" : "";
+    var paginaAnticipoActive = paginaAnticipo ? "active" : "";
+    var paginaProcesoActive = paginaProceso ? "active" : "";
+    var paginaParametroActive = paginaParametro ? "active" : "";
+    var paginaUsuarioActive = paginaUsuario ? "active" : "";
+
+    var paginaTipoBOCEP = paginaActiva.Contains("BOCEP") ? "active" : "";
+    var paginaTipoComunes = paginaActiva.Contains("Comunes") ? "active" : "";
+    var paginaTipoFuncionarios = paginaActiva.Contains("Funcionarios") ? "active" : "";
+}
+
+<div class="container-fluid mt-3 mb-0 pb-0 h-98">
+    <div class="row h-98">
+        <div class="col-md-2 sidebar">
+            <nav class="navbar navbar-light bg-white border-bottom border-right box-shadow h-98 align-items-start navbar-expand-sm">
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav flex-column h-auto">
+                        <li class="nav-item @paginaPrincipalActive">
+                            <a class="nav-link" asp-area="Aplicacion" asp-page="/Index">
+                                <i class="bi-clipboard"></i>
+                                Principal
+                            </a>
+                        </li>
+                        <li class="nav-item @paginaEscalafonActive">
+                            <a class="nav-link" asp-area="Aplicacion" asp-page="/Escalafon/Listado">
+                                <i class="bi-files"></i>
+                                Escalafón
+                            </a>
+                        </li>
+                        <li class="nav-item @paginaAgenteActive">
+                            <a class="nav-link" asp-area="Aplicacion" asp-page="/Agentes/Comunes/Listado">
+                                <i class="bi-file-person"></i>
+                                Agentes
+                            </a>
+                            @if (!string.IsNullOrEmpty(paginaAgenteActive))
+                            {
+                                <ul style="list-style-type: none; margin:0px 0px 0px 10px; padding:0">
+                                    <li class="nav-item @paginaTipoComunes">
+                                        <a class="nav-link" asp-area="Aplicacion" asp-page="/Agentes/Comunes/Listado">
+                                            <i class="bi-file-earmark-person"></i>
+                                            Comunes
+                                        </a>
+                                    </li>
+                                    <li class="nav-item @paginaTipoBOCEP">
+                                        <a class="nav-link" asp-area="Aplicacion" asp-page="/Agentes/BOCEP/Listado">
+                                            <i class="bi-file-earmark-person"></i>
+                                            BOCEP
+                                        </a>
+                                    </li>
+                                    <li class="nav-item @paginaTipoFuncionarios">
+                                        <a class="nav-link" asp-area="Aplicacion" asp-page="/Agentes/Funcionarios/Listado">
+                                            <i class="bi-file-earmark-person"></i>
+                                            Funcionarios
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                        </li>
+                        <li class="nav-item @paginaAnticipoActive">
+                            <a class="nav-link" asp-area="Aplicacion" asp-page="/Anticipos/Comunes/Listado">
+                                <i class="bi-file-binary"></i>
+                                Anticipos
+                            </a>
+                            @if (!string.IsNullOrEmpty(paginaAnticipoActive))
+                            {
+                                <ul style="list-style-type: none; margin: 0px 0px 0px 10px; padding: 0">
+                                    <li class="nav-item @paginaTipoComunes">
+                                        <a class="nav-link" asp-area="Aplicacion" asp-page="/Anticipos/Comunes/Listado">
+                                            <i class="bi-file-earmark-person"></i>
+                                            Comunes
+                                        </a>
+                                    </li>
+                                    <li class="nav-item @paginaTipoBOCEP">
+                                        <a class="nav-link" asp-area="Aplicacion" asp-page="/Anticipos/BOCEP/Listado">
+                                            <i class="bi-file-earmark-person"></i>
+                                            BOCEP
+                                        </a>
+                                    </li>
+                                    <li class="nav-item @paginaTipoFuncionarios">
+                                        <a class="nav-link" asp-area="Aplicacion" asp-page="/Anticipos/Funcionarios/Listado">
+                                            <i class="bi-file-earmark-person"></i>
+                                            Funcionarios
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                        </li>
+                        <li class="nav-item @paginaProcesoActive">
+                            <a class="nav-link" asp-area="Aplicacion" asp-page="/Procesos/Listado">
+                                <i class="bi-folder"></i>
+                                Procesos mensuales
+                            </a>
+                        </li>
+                        <li class="nav-item @paginaParametroActive">
+                            <a class="nav-link" asp-area="Aplicacion" asp-page="/Parametros/Detalles" asp-route-id="1">
+                                <i class="bi-gear"></i>
+                                Parámetros
+                            </a>
+                        </li>
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <li class="nav-item @paginaUsuarioActive">
+                                <a class="nav-link" asp-area="Aplicacion" asp-page="/Usuarios/Listado">
+                                    <i class="bi-people"></i>
+                                    Usuarios
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="col mt-3 h-100">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

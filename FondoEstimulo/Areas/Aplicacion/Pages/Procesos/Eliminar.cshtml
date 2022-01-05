@@ -1,0 +1,42 @@
+﻿@page
+@model FondoEstimulo.Areas.Aplicacion.Pages.Procesos.DeleteModel
+
+@{
+    ViewData["Title"] = "Eliminar - Procesos mensuales";
+}
+
+<h2 class="text-primary">
+    Procesos mensuales
+    <small class="text-muted">- Eliminar -</small>
+</h2>
+<label>¿Seguro que desea eliminar este registro?</label>
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Proceso.Periodo):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Proceso.Periodo)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Proceso.Fecha):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Proceso.Fecha)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Proceso.Registros):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Proceso.Registros)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Proceso.ProcesoID" />
+        <button value="Eliminar" class="btn btn-danger"><i class="bi-trash mr-2"></i>Eliminar</button>
+        <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+    </form>
+</div>

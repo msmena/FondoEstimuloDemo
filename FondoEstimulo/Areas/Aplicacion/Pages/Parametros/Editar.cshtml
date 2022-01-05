@@ -1,0 +1,65 @@
+﻿@page "{id:int}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Parametros.EditModel
+
+@{
+    ViewData["Title"] = "Editar - Parámetros";
+}
+
+<h2 class="text-primary">
+    Parámetros
+    <small class="text-muted">- Editar -</small>
+</h2>
+<hr />
+
+<div class="row">
+    <div class="col">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Parametro.ParametroID" />
+            <div class="form-group row">
+                <label asp-for="Parametro.Incompatibilidad" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Parametro.Incompatibilidad):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Parametro.Incompatibilidad" class="form-control" />
+                    <span asp-validation-for="Parametro.Incompatibilidad" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Parametro.Ley6655" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Parametro.Ley6655):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Parametro.Ley6655" class="form-control" />
+                    <span asp-validation-for="Parametro.Ley6655" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Parametro.RiesgoCajaBase" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Parametro.RiesgoCajaBase):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Parametro.RiesgoCajaBase" class="form-control" />
+                    <span asp-validation-for="Parametro.RiesgoCajaBase" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Parametro.SumaFijaRem" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Parametro.SumaFijaRem):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Parametro.SumaFijaRem" class="form-control" />
+                    <span asp-validation-for="Parametro.SumaFijaRem" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Confirmar" class="btn btn-primary"><i class="bi-check-square mr-2"></i>Confirmar</button>
+                <a asp-page="/Parametros/Detalles" asp-route-id="1" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver a detalles</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

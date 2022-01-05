@@ -1,0 +1,59 @@
+﻿@page "{id}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Usuarios.EditModel
+@{
+    ViewData["Title"] = "Editar - Usuarios";
+}
+
+<h2 class="text-primary">
+    Usuarios
+    <small class="text-muted">- Editar -</small>
+</h2>
+<hr />
+
+<div class="row">
+    <div class="col">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="Input.UserID" />
+            <div class="form-group row">
+                <label asp-for="Input.User" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Input.User" class="form-control" />
+                    <span asp-validation-for="Input.User" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-3">
+                    Rol
+                </label>
+                <div class="col-sm-9">
+                    <select class="form-control" asp-for="Input.Rol" asp-items="Html.GetEnumSelectList<FondoEstimulo.Models.Parametro.Roles>()">
+                        <option value="">-- Seleccionar rol --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Input.Email" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+            </div>
+            @{
+                if (!String.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <p class="alert alert-danger">@Model.ErrorMessage</p>
+                }
+            }
+        <div class="form-group">
+            <button type="submit" value="Confirmar" class="btn btn-primary"><i class="bi-check-square mr-2"></i>Confirmar</button>
+            <button type="reset" value="Limpiar" class="btn btn-sm btn-outline-primary"><i class="bi-recycle mr-2"></i>Limpiar</button>
+            <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+        </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

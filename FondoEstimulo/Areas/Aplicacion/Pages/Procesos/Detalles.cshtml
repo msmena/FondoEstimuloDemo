@@ -1,0 +1,82 @@
+﻿@page
+@model FondoEstimulo.Areas.Aplicacion.Pages.Procesos.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalles - Procesos mensuales";
+}
+
+<h2 class="text-primary">
+    Procesos mensuales
+    <small class="text-muted">- Detalles -</small>
+</h2>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Proceso.Periodo):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Proceso.Periodo)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Proceso.Fecha):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Proceso.Fecha)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Proceso.Registros):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Proceso.Registros)
+        </dd>
+    </dl>
+</div>
+<p />
+<h5><small class="text-muted">Listado de agentes sin anticipo mensual</small></h5>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <caption>Listado de agentes sin anticipo mensual</caption>
+        <thead class="thead-light text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgentesSinAnticipo[0].DNI)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgentesSinAnticipo[0].Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgentesSinAnticipo[0].AgenteIDExterno)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.AgentesSinAnticipo.Count > 0)
+            {
+                foreach (var item in Model.AgentesSinAnticipo)
+                {
+                    <tr>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.DNI)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AgenteIDExterno)
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="text-center">
+                    <td colspan="6">No se encontraron registros.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+</div>

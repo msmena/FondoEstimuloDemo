@@ -1,0 +1,73 @@
+﻿@page
+@model FondoEstimulo.Areas.Aplicacion.Pages.Procesos.CompararModel
+@{
+    ViewData["Title"] = "Comparar - Procesos mensuales";
+}
+
+<h2 class="text-primary">
+    Procesos mensuales <small class="text-muted">- Comparar -</small>
+</h2>
+<br />
+@{
+    if (!String.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <p class="alert alert-danger">@Model.ErrorMessage</p>
+    }
+    if (Model.ResultadoMessage != null && Model.ResultadoMessage.Count > 0)
+    {
+        <div class="card border-secondary p-1" style="font-size: small">
+            <div class="card-header">
+                <a href="#card-body-cb1" data-toggle="collapse" class="card-link">
+                    <i class="bi-arrow-down-up"></i>
+                    Resultados:
+                </a>
+            </div>
+            <div id="card-body-cb1" class="card-body collapse">
+                @foreach (string linea in Model.ResultadoMessage)
+                {
+                    <label>@linea</label><br />
+                }
+            </div>
+        </div>
+    }
+}
+<br />
+<div class="row">
+    <div class="col">
+        <form enctype="multipart/form-data" method="post">
+            <div class="form-group row">
+                <label asp-for="@Model.Periodo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Periodo):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="@Model.Periodo" class="form-control" type="month" />
+                    <span asp-validation-for="@Model.Periodo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="@Model.Pestaña" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Pestaña):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="@Model.Pestaña" class="form-control" placeholder="1" />
+                    <span asp-validation-for="@Model.Pestaña" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="@Model.FormFile" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.FormFile):
+                </label>
+                <div class="col-sm-9">
+                    <input type="file" asp-for="@Model.FormFile" class="form-control" accept=".xls,.xlsx" />
+                    <span asp-validation-for="@Model.FormFile" class="text-danger"></span>
+                </div>
+            </div>
+            <button asp-page-handler="Upload" type="submit" class="btn btn-primary">
+                <i class="bi-journals mr-2"></i>Comparar
+            </button>
+            <a asp-page="./Listado" class="btn btn-sm btn-outline-primary">
+                <i class="bi-box-arrow-in-left mr-2"></i>Volver al listado
+            </a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+@using Microsoft.AspNetCore.Identity
+@using FondoEstimulo.Models.Aplicacion;
+@using Microsoft.Extensions.PlatformAbstractions;
+
+@inject SignInManager<Usuario> SignInManager
+@inject UserManager<Usuario> UserManager
+
+@{
+    var fecha = DateTime.Today.ToLongDateString();
+    ApplicationEnvironment app = PlatformServices.Default.Application;
+    string version = app.ApplicationVersion;
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="navbar-nav">
+        <li class="nav-item mr-auto">
+            <small class="text-muted">
+                Usuario: @UserManager.GetUserName(User) | @version | @fecha
+            </small>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-link text-dark m-0 mr-2 p-0" asp-area="Aplicacion" asp-page="/Cuenta/CambiarContrasena">
+                <i class="bi-key"></i>
+                Cambiar contrase&ntilde;a
+            </a>
+        </li>
+        &nbsp;|&nbsp;
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark m-0 ml-2 p-0">
+                    <i class="bi-lock"></i>
+                    Cerrar sesi&oacute;n
+                </button>
+            </form>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="navbar-nav">
+        <li class="nav-item mr-auto">
+            <small class="text-muted">
+                @version | @fecha
+            </small>
+        </li>
+    </ul>
+}

@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using FondoEstimulo.Models.Aplicacion
+
+@inject SignInManager<Usuario> SignInManager
+@inject UserManager<Usuario> UserManager
+
+<!DOCTYPE html>
+<html lang="es-ar">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Fondo de Estimulo</title>
+    <link rel="stylesheet" href="~/css/theme.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/bootstrap-icons.css" />
+</head>
+<body>
+    <partial name="_LayoutHeaderPartial" />
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col main mx-auto">
+                <main role="main" class="border-secondary pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+    <partial name="_LayoutFooterPartial" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

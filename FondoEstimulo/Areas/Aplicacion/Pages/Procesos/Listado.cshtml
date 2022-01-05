@@ -1,0 +1,224 @@
+﻿@page "{indicepagina=1}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Procesos.IndexModel
+
+@{
+    ViewData["Title"] = "Listado - Procesos mensuales";
+}
+
+<h2 class="text-primary">
+    Procesos mensuales <small class="text-muted">- Listado -</small>
+</h2>
+<p>
+    <a asp-page="Crear" class="btn btn-outline-primary btn-sm"><i class="bi-plus-square mr-2"></i>Nuevo registro</a>
+    <a asp-page="Importar" class="btn btn-outline-primary btn-sm"><i class="bi-cloud-arrow-up mr-2"></i>Importar</a>
+    <a asp-page="Comparar" class="btn btn-outline-primary btn-sm"><i class="bi-journals mr-2"></i>Comparar</a>
+</p>
+<div class="card border-secondary p-1" style="font-size: small">
+    <div class="card-header">
+        <a href="#card-body-cb1" data-toggle="collapse" class="card-link">
+            <i class="bi-arrow-down-up"></i>
+            Filtros
+        </a>
+    </div>
+    <div id="card-body-cb1" class="card-body collapse">
+        <form asp-page="./Listado" method="get">
+            <fieldset>
+                <input type="hidden" asp-for="@Model.OrdenCampo" />
+                <div class="form-group row p-0 m-0 pt-2">
+                    <div class="col-sm-8 text-left">
+                        <label class="col-form-label">@Html.DisplayNameFor(model => model.Procesos[0].Periodo) desde: </label>
+                        <input type="month" asp-for="FPeriodoDesde" class="form-control-sm" />
+                        <label class="col-form-label">@Html.DisplayNameFor(model => model.Procesos[0].Periodo) hasta: </label>
+                        <input type="month" asp-for="FPeriodoHasta" class="form-control-sm" />
+                    </div>
+                    <div class="col-sm-4 text-center align-middle">
+                        <button type="submit" value="Aplicar" class="btn btn-primary mr-sm-2">
+                            <i class="bi-funnel mr-2"></i>Aplicar
+                        </button>
+                        <a asp-page="./Listado" class="btn btn-outline-primary btn-sm mr-sm-2">
+                            <i class="bi-recycle mr-2"></i>Limpiar
+                        </a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<br />
+@{
+    string sPeriodoDesdeAno = Model.FPeriodoDesde.HasValue ? Model.FPeriodoDesde.Value.Year.ToString() : "";
+    string sPeriodoDesdeMes = Model.FPeriodoDesde.HasValue ? Model.FPeriodoDesde.Value.Month.ToString() : "";
+    string sPeriodoHastaAno = Model.FPeriodoHasta.HasValue ? Model.FPeriodoHasta.Value.Year.ToString() : "";
+    string sPeriodoHastaMes = Model.FPeriodoHasta.HasValue ? Model.FPeriodoHasta.Value.Month.ToString() : "";
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <caption>Listado de procesos mensuales</caption>
+        <thead class="thead-light text-center">
+            <tr>
+                <th>
+                    @{
+                        string ordenCampoFecha = !String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Equals("Fecha") ? "Fecha_desc" : "Fecha";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoFecha" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                       asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" class="text-decoration-none">
+                        @Html.DisplayNameFor(model => model.Procesos[0].Fecha)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("Fecha"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <i class="bi-sort-down-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="bi-sort-down"></i>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @{
+                        string ordenCampoPeriodo = !String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Equals("Periodo") ? "Periodo_desc" : "Periodo";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoPeriodo" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                       asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" class="text-decoration-none">
+                        @Html.DisplayNameFor(model => model.Procesos[0].Periodo)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("Periodo"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <i class="bi-sort-down-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="bi-sort-down"></i>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @{
+                        string ordenCampoRegistros = !String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Equals("Registros") ? "Registros_desc" : "Registros";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoRegistros" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                       asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" class="text-decoration-none">
+                        @Html.DisplayNameFor(model => model.Procesos[0].Registros)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("Registros"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <i class="bi-sort-down-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="bi-sort-down"></i>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Procesos.Count > 0)
+            {
+                foreach (var item in Model.Procesos)
+                {
+                    <tr>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.Fecha)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.Periodo)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.Registros)
+                        </td>
+                        <td class="text-center align-middle">
+                            <div class="btn-group" style="border-radius:0">
+                                <a asp-page="./Detalles" asp-route-id="@item.ProcesoID" class="btn btn-outline-primary btn-sm"
+                                   data-toggle="tooltip" title="Detalles">
+                                    <i class="bi-journal-text" style="font-size: 1rem;"></i>
+                                </a>
+                            </div>
+                            <a asp-page="./Eliminar" asp-route-id="@item.ProcesoID" class="btn btn-outline-danger btn-sm"
+                               data-toggle="tooltip" title="Eliminar">
+                                <i class="bi-journal-x" style="font-size: 1rem;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="text-center">
+                    <td colspan="4">No se encontraron registros.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@{
+    var prevDisabled = !Model.Procesos.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Procesos.HasNextPage ? "disabled" : "";
+}
+<div class="row p-0 m-0 align-items-md-center">
+    <div class="col pl-2 small text-muted">
+        <p>Mostrando @Model.Procesos.RecordsFrom hasta @Model.Procesos.RecordsTo de un total de @Model.Procesos.RecordsTotal registros</p>
+    </div>
+    <div class="col text-center align-middle">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @prevDisabled">
+                <a asp-page="./Listado" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                   asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-indicePagina="1"
+                   class="page-link" data-toggle="tooltip" title="Primero">
+                    <i class="bi-chevron-double-left"></i>
+                </a>
+            </li>
+            <li class="page-item @prevDisabled">
+                <a asp-page="./Listado" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                   asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-indicePagina="@(Model.Procesos.PageIndex - 1)"
+                   class="page-link"data-toggle="tooltip" title="Anterior">
+                    <i class="bi-chevron-left"></i>
+                </a>
+            </li>
+
+            @{ for (int i = Model.Procesos.StartPage; i <= Model.Procesos.EndPage; i++)
+                {
+                    if (Model.Procesos.PageIndex == i)
+                    {
+                        <li class="page-item active">
+                            <a asp-page="./Listado" class="btn-sm page-link" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                               asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-indicePagina=@i>
+                                @i
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a asp-page="./Listado" class="btn-sm page-link" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                               asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-indicePagina=@i>
+                                @i
+                            </a>
+                        </li>
+                    }
+                }
+            }
+            <li class="page-item @nextDisabled">
+                <a asp-page="./Listado" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                   asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-indicePagina="@(Model.Procesos.PageIndex + 1)"
+                   class="page-link" data-toggle="tooltip" title="Siguiente">
+                    <i class="bi-chevron-right"></i>
+                </a>
+            </li>
+            <li class="page-item @nextDisabled">
+                <a asp-page="./Listado" asp-route-periodoDesdeAno="@sPeriodoDesdeAno" asp-route-periodoDesdeMes="@sPeriodoDesdeMes"
+                   asp-route-periodoHastaAno="@sPeriodoHastaAno" asp-route-periodoHastaMes="@sPeriodoHastaMes" asp-route-indicePagina="@Model.Procesos.TotalPages"
+                   class="page-link" data-toggle="tooltip" title="Ultimo">
+                    <i class="bi-chevron-double-right"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

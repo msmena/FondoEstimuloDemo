@@ -1,0 +1,365 @@
+﻿@page "{id:int}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Anticipos.Comunes.EditModel
+
+@{
+    ViewData["Title"] = "Editar - Anticipos";
+}
+
+<h2 class="text-primary">
+    Anticipos<small class="text-muted"> - Agentes comunes - Editar -</small>
+</h2>
+<hr />
+<hr />
+<div class="row">
+    <div class="col">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Anticipo.AnticipoID" />
+            <input type="hidden" asp-for="Anticipo.AgenteID" />
+            <input type="hidden" asp-for="Anticipo.Fecha" />
+            <input type="hidden" asp-for="Anticipo.Periodo" />
+            <input type="hidden" asp-for="Anticipo.Tipo" />
+            <div class="form-group row">
+                <label asp-for="Anticipo.AgenteID" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.AgenteID):
+                </label>
+                <div class="col-sm-9">
+                    @Html.DisplayFor(model => model.Anticipo.Agente.Nombre)
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Fecha" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Fecha):
+                </label>
+                <div class="col-sm-9">
+                    @Html.DisplayFor(model => model.Anticipo.Fecha)
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Periodo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Periodo):
+                </label>
+                <div class="col-sm-9">
+                    @Html.DisplayFor(model => model.Anticipo.Periodo)
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Tipo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Tipo):
+                </label>
+                <div class="col-sm-9">
+                    @Html.DisplayFor(model => model.Anticipo.Tipo)
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Escalafon" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Escalafon):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.Escalafon" placeholder="A1" class="form-control" />
+                    <span asp-validation-for="Anticipo.Escalafon" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.SueldoBasico" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.SueldoBasico):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.SueldoBasico" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.SueldoBasico" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.ComplementoBasico" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.ComplementoBasico):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.ComplementoBasico" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.ComplementoBasico" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.SuplementoRemunerativo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.SuplementoRemunerativo):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.SuplementoRemunerativo" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.SuplementoRemunerativo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.SubtotalBasico" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.SubtotalBasico):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.SubtotalBasico" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.SubtotalBasico" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.RetiroFecha" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.RetiroFecha):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.RetiroFecha" placeholder="01/01/1990" class="form-control" />
+                    <span asp-validation-for="Anticipo.RetiroFecha" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.AñosAntiguedad" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.AñosAntiguedad):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.AñosAntiguedad" placeholder="1234" class="form-control" />
+                    <span asp-validation-for="Anticipo.AñosAntiguedad" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.ReparacionHistoricaCoeficiente" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.ReparacionHistoricaCoeficiente):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.ReparacionHistoricaCoeficiente" placeholder="1,23" class="form-control" />
+                    <span asp-validation-for="Anticipo.ReparacionHistoricaCoeficiente" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.ReparacionHistorica" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.ReparacionHistorica):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.ReparacionHistorica" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.ReparacionHistorica" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Antiguedad" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Antiguedad):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.Antiguedad" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.Antiguedad" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.IncompatibilidadCoeficiente" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.IncompatibilidadCoeficiente):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.IncompatibilidadCoeficiente" placeholder="1,23" class="form-control" />
+                    <span asp-validation-for="Anticipo.IncompatibilidadCoeficiente" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Incompatibilidad" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Incompatibilidad):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.Incompatibilidad" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.Incompatibilidad" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.DedicacionCoeficiente" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.DedicacionCoeficiente):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.DedicacionCoeficiente" placeholder="1,23" class="form-control" />
+                    <span asp-validation-for="Anticipo.DedicacionCoeficiente" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Dedicacion" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Dedicacion):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.Dedicacion" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.Dedicacion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.TituloTipo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.TituloTipo):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.TituloTipo" placeholder="1,23" class="form-control" />
+                    <span asp-validation-for="Anticipo.TituloTipo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.TituloTipoCoeficiente" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.TituloTipoCoeficiente):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.TituloTipoCoeficiente" placeholder="1,23" class="form-control" />
+                    <span asp-validation-for="Anticipo.TituloTipoCoeficiente" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.TituloEscalafonSueldoBasico" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.TituloEscalafonSueldoBasico):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.TituloEscalafonSueldoBasico" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.TituloEscalafonSueldoBasico" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.TituloEscalafonComplementoBasico" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.TituloEscalafonComplementoBasico):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.TituloEscalafonComplementoBasico" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.TituloEscalafonComplementoBasico" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Titulo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Titulo):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.Titulo" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.Titulo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Ley6655Coeficiente" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Ley6655Coeficiente):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.Ley6655Coeficiente" placeholder="1,23" class="form-control" />
+                    <span asp-validation-for="Anticipo.Ley6655Coeficiente" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Ley6655" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Ley6655):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.Ley6655" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.Ley6655" class="text-danger">
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.FondoFijo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.FondoFijo):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.FondoFijo" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.FondoFijo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.RiesgoCajaCoeficiente" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.RiesgoCajaCoeficiente):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.RiesgoCajaCoeficiente" placeholder="1,23" class="form-control" />
+                    <span asp-validation-for="Anticipo.RiesgoCajaCoeficiente" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.RiesgoCaja" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.RiesgoCaja):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.RiesgoCaja" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.RiesgoCaja" class="text-danger">
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.AdecuacionEscalafonaria" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.AdecuacionEscalafonaria):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.AdecuacionEscalafonaria" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.AdecuacionEscalafonaria" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Subrogancia" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Subrogancia):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.Subrogancia" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.Subrogancia" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Subtotal" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Subtotal):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.Subtotal" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.Subtotal" class="text-danger">
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.SAC" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.SAC):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.SAC" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.SAC" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.Total" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.Total):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.Total" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.Total" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.FondoEstimuloCoeficiente" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.FondoEstimuloCoeficiente):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.FondoEstimuloCoeficiente" placeholder="1,23" class="form-control" />
+                    <span asp-validation-for="Anticipo.FondoEstimuloCoeficiente" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.FondoEstimulo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.FondoEstimulo):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.FondoEstimulo" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.FondoEstimulo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.SRNoBonificableCoeficiente" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.SRNoBonificableCoeficiente):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.SRNoBonificableCoeficiente" placeholder="1,23" class="form-control" />
+                    <span asp-validation-for="Anticipo.SRNoBonificableCoeficiente" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Anticipo.FondoReal" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Anticipo.FondoReal):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Anticipo.FondoReal" placeholder="1234,56" class="form-control" />
+                    <span asp-validation-for="Anticipo.FondoReal" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Confirmar" class="btn btn-primary"><i class="bi-check-square mr-2"></i>Confirmar</button>
+                <button type="reset" value="Limpiar" class="btn btn-sm btn-outline-primary"><i class="bi-recycle mr-2"></i>Limpiar</button>
+                <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

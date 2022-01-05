@@ -1,0 +1,55 @@
+﻿@page "{id:int}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Parametros.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalles - Parámetros";
+}
+
+<h2 class="text-primary">
+    Parámetros <small class="text-muted">- Detalles -</small>
+</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Parametro.Incompatibilidad):
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Parametro.Incompatibilidad)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Parametro.Ley6655):
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Parametro.Ley6655)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Parametro.RiesgoCajaBase):
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Parametro.RiesgoCajaBase)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Parametro.SumaFijaRem):
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Parametro.SumaFijaRem)
+        </dd>
+    </dl>
+</div>
+<div>
+    <dl class="row">
+        @foreach (var item in Model.Bonificaciones)
+        {
+            <dt class="col-sm-3">
+                @Html.DisplayFor(modelItem => item.Descripcion):
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(modelItem => item.Valor)
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    <a asp-page="./Editar" asp-route-id="@Model.Parametro.ParametroID" class="btn btn-outline-primary btn-sm"><i class="bi-journal-check mr-2"></i>Editar</a>
+</div>

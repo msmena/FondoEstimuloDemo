@@ -1,0 +1,215 @@
+﻿@page "{id:int}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Agentes.Comunes.EditModel
+
+@{
+    ViewData["Title"] = "Editar - Agentes";
+}
+
+<h2 class="text-primary">
+    Agentes comunes
+    <small class="text-muted">- Editar -</small>
+</h2>
+<hr />
+
+<div class="row">
+    <div class="col">
+        <form method="post">
+            @{
+                if (!String.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <p class="alert alert-danger">@Model.ErrorMessage</p>
+                }
+            }
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Agente.AgenteID" />
+            <div class="form-group row">
+                <label asp-for="Agente.DNI" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.DNI):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.DNI" class="form-control" placeholder="123456" />
+                    <span asp-validation-for="Agente.DNI" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.AgenteIDExterno" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.AgenteIDExterno):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.AgenteIDExterno" class="form-control" placeholder="123456" />
+                    <span asp-validation-for="Agente.AgenteIDExterno" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.Nombre" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.Nombre):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.Nombre" class="form-control" placeholder="Nombre" />
+                    <span asp-validation-for="Agente.Nombre" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.Tipo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.Tipo):
+                </label>
+                <div class="col-sm-9">
+                    <select class="form-control" asp-for="Agente.Tipo" asp-items="Html.GetEnumSelectList<FondoEstimulo.Models.Parametro.AgenteTipo>()">
+                        <option value="">-- Seleccionar --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.EscalafonID" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.Escalafon):
+                </label>
+                <div class="col-sm-9">
+                    <select asp-for="Agente.EscalafonID" class="form-control" asp-items="@Model.EscalafonNameSL">
+                        <option value="">-- Seleccionar escalafón --</option>
+                    </select>
+                    <a asp-page="/Escalafon/Crear" class="btn btn-outline-primary btn-sm mt-2"><i class="bi-check-square mr-2"></i>Crear nuevo apartado y grupo</a>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.InicioActividades" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.InicioActividades):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.InicioActividades" class="form-control" placeholder="01/01/1990" />
+                    <span asp-validation-for="Agente.InicioActividades" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.Dedicacion" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.Dedicacion):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.Dedicacion" class="form-control" placeholder="1,23" />
+                    <span asp-validation-for="Agente.Dedicacion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.BonificacionTituloID" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.BonificacionTituloID):
+                </label>
+                <div class="col-sm-9">
+                    <select asp-for="Agente.BonificacionTituloID" class="form-control" asp-items="@Model.BonificacionTituloSL">
+                        <option value="">-- Seleccionar --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.BonificacionTituloEscalafonID" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.BonificacionTituloEscalafonID):
+                </label>
+                <div class="col-sm-9">
+                    <select asp-for="Agente.BonificacionTituloEscalafonID" class="form-control" asp-items="@Model.EscalafonNameSL">
+                        <option value="">-- Seleccionar --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.RiesgoCaja" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.RiesgoCaja):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.RiesgoCaja" class="form-control" placeholder="1,23" />
+                    <span asp-validation-for="Agente.RiesgoCaja" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.ReparacionHistorica" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.ReparacionHistorica):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.ReparacionHistorica" class="form-control" placeholder="1,23" />
+                    <span asp-validation-for="Agente.ReparacionHistorica" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.FondoEstimulo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.FondoEstimulo):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.FondoEstimulo" class="form-control" placeholder="1,23" />
+                    <span asp-validation-for="Agente.FondoEstimulo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.AdecuacionEscalafonaria" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.AdecuacionEscalafonaria):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.AdecuacionEscalafonaria" class="form-control" placeholder="1234,56" />
+                    <span asp-validation-for="Agente.AdecuacionEscalafonaria" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.Subrogancia" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.Subrogancia):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.Subrogancia" class="form-control" placeholder="1234,56" />
+                    <span asp-validation-for="Agente.Subrogancia" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.FondoFijo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.FondoFijo):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.FondoFijo" class="form-control" placeholder="1234,56" />
+                    <span asp-validation-for="Agente.FondoFijo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="custom-control custom-checkbox ml-3 col-sm-12">
+                    <input type="checkbox" class="custom-control-input" id="customCheckLey6655" asp-for="Agente.Ley6655" />
+                    <label class="custom-control-label" for="customCheckLey6655">@Html.DisplayNameFor(model => model.Agente.Ley6655)</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="custom-control custom-checkbox ml-3 col-sm-12">
+                    <input type="checkbox" class="custom-control-input" id="customCheckIncompatibilidad" asp-for="Agente.Incompatibilidad" />
+                    <label class="custom-control-label" for="customCheckIncompatibilidad">@Html.DisplayNameFor(model => model.Agente.Incompatibilidad)</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.SRNoBonificable" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.SRNoBonificable):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.SRNoBonificable" class="form-control" placeholder="1,23" />
+                    <span asp-validation-for="Agente.SRNoBonificable" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.Retiro" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.Retiro):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.Retiro" class="form-control" />
+                    <span asp-validation-for="Agente.Retiro" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Agente.Jubilacion" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Agente.Jubilacion):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Agente.Jubilacion" class="form-control" />
+                    <span asp-validation-for="Agente.Jubilacion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Confirmar" class="btn btn-primary"><i class="bi-check-square mr-2"></i>Confirmar</button>
+                <button type="reset" value="Limpiar" class="btn btn-sm btn-outline-primary"><i class="bi-recycle mr-2"></i>Limpiar</button>
+                <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,103 @@
+﻿@page "{id:int}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Agentes.Funcionarios.DeleteModel
+
+@{
+    ViewData["Title"] = "Eliminar - Agentes";
+}
+
+<h2 class="text-primary">
+    Agentes funcionarios
+    <small class="text-muted">- Eliminar -</small>
+</h2>
+<label>¿Seguro que desea eliminar este registro?</label>
+<hr />
+<div>
+    @{
+        if (!String.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <p class="alert alert-danger">@Model.ErrorMessage</p>
+        }
+    }
+<dl class="row">
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.DNI):
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Agente.DNI)
+    </dd>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.AgenteIDExterno):
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Agente.AgenteIDExterno)
+    </dd>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.Nombre):
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Agente.Nombre)
+    </dd>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.Escalafon):
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Agente.Escalafon.EscalafonApartadoGrupoIdentificador)
+    </dd>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.InicioActividades):
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Agente.InicioActividades)
+    </dd>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.SRNoBonificable):
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Agente.SRNoBonificable)
+    </dd>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.CompensancionJerarquica):
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Agente.CompensancionJerarquica)
+    </dd>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.AdicionalRemunerativo):
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Agente.AdicionalRemunerativo)
+    </dd>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.BonificacionTitulo):
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Agente.BonificacionTitulo.Descripcion)
+    </dd>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.BonificacionTituloEscalafon):
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Agente.BonificacionTituloEscalafon.EscalafonApartadoGrupoIdentificador)
+    </dd>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.FondoEstimulo):
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Agente.FondoEstimulo)
+    </dd>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Agente.Incompatibilidad):
+    </dt>
+    <dd class="col-sm-8">
+        <div class="custom-control custom-checkbox ml-3 col-sm-12">
+            <input type="checkbox" class="custom-control-input" id="customCheckIncompatibilidad" asp-for="Agente.Incompatibilidad" disabled />
+            <label class="custom-control-label" for="customCheckIncompatibilidad"></label>
+        </div>
+    </dd>
+</dl>
+<form method="post">
+    <input type="hidden" asp-for="Agente.AgenteID" />
+    <button value="Eliminar" class="btn btn-danger"><i class="bi-trash mr-2"></i>Eliminar</button>
+    <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+</form>
+</div>

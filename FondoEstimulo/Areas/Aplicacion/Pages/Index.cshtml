@@ -1,0 +1,138 @@
+﻿@page "{indicepagina=1}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.IndexModel
+@{
+    ViewData["Title"] = "Principal";
+}
+<h2 class="text-primary">
+    Agentes <small class="text-muted">- @Model.TituloListado1 -</small>
+</h2>
+<button class="btn btn-outline-light text-dark m-0 mr-2 p-0 float-right" onclick="imprimirMensaje()">
+    <i class="bi-printer mr-2"></i>
+    Imprimir</button>
+<script>
+    function imprimirMensaje() {
+        alert("Modelo de impresión no implementado.");
+    }
+</script>
+<br />
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <caption>Listado de agentes</caption>
+        <thead class="thead-light text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agentes1[0].DNI)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agentes1[0].Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agentes1[0].Escalafon.EscalafonApartadoGrupoIdentificador)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agentes1[0].InicioActividades)
+                </th>
+                <th>
+                    Antiguedad
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Agentes1.Count > 0)
+            {
+                foreach (var item in Model.Agentes1)
+                {
+                    <tr>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.DNI)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Escalafon.EscalafonApartadoGrupoIdentificador)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.InicioActividades)
+                        </td>
+                        <td class="text-center">
+                            @{
+                                double antiguedad = Math.Floor(Model.Fecha1.Subtract(item.InicioActividades).TotalDays / 365);
+                            }
+                            @antiguedad.ToString()
+                        </td>
+                    </tr>
+                    }
+                }
+                else
+                {
+                <tr class="text-center">
+                    <td colspan="6">No se encontraron registros.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<p />
+<h2 class="text-primary">
+    Agentes <small class="text-muted">- @Model.TituloListado2 -</small>
+</h2>
+<br />
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <caption>Listado de agentes</caption>
+        <thead class="thead-light text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agentes2[0].DNI)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agentes2[0].Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agentes2[0].Escalafon.EscalafonApartadoGrupoIdentificador)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agentes2[0].InicioActividades)
+                </th>
+                <th>
+                    Antiguedad
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Agentes2.Count > 0)
+            {
+                foreach (var item in Model.Agentes2)
+                {
+                <tr>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.DNI)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Escalafon.EscalafonApartadoGrupoIdentificador)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.InicioActividades)
+                    </td>
+                    <td class="text-center">
+                        @{
+                            double antiguedad = Math.Floor(Model.Fecha2.Subtract(item.InicioActividades).TotalDays / 365);
+                        }
+                        @antiguedad.ToString()
+                    </td>
+                </tr>
+                }
+            }
+            else
+            {
+                <tr class="text-center">
+                    <td colspan="6">No se encontraron registros.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

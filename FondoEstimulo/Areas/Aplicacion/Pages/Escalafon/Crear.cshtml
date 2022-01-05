@@ -1,0 +1,80 @@
+﻿@page
+@model FondoEstimulo.Areas.Aplicacion.Pages.Escalafon.CreateModel
+
+@{
+    ViewData["Title"] = "Nuevo registro - Escalafón";
+}
+
+<h2 class="text-primary">
+    Escalafón
+    <small class="text-muted">- Nuevo registro -</small>
+</h2>
+<hr />
+
+<div class="row">
+    <div class="col">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <label asp-for="Escalafon.Apartado" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Escalafon.Apartado):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Escalafon.Apartado" class="form-control" placeholder="A" />
+                    <span asp-validation-for="Escalafon.Apartado" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Escalafon.Grupo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Escalafon.Grupo):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Escalafon.Grupo" class="form-control" placeholder="1" />
+                    <span asp-validation-for="Escalafon.Grupo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Escalafon.SueldoBasico" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Escalafon.SueldoBasico):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Escalafon.SueldoBasico" class="form-control" placeholder="1234,56" />
+                    <span asp-validation-for="Escalafon.SueldoBasico" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Escalafon.ComplementoBasico" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Escalafon.ComplementoBasico):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Escalafon.ComplementoBasico" class="form-control" placeholder="1234,56" />
+                    <span asp-validation-for="Escalafon.ComplementoBasico" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Escalafon.SuplementoRemunerativo" class="control-label col-sm-3">
+                    @Html.DisplayNameFor(model => model.Escalafon.SuplementoRemunerativo):
+                </label>
+                <div class="col-sm-9">
+                    <input asp-for="Escalafon.SuplementoRemunerativo" class="form-control" placeholder="1234,56" />
+                    <span asp-validation-for="Escalafon.SuplementoRemunerativo" class="text-danger"></span>
+                </div>
+            </div>
+            @{
+                if (!String.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <p class="alert alert-danger">@Model.ErrorMessage</p>
+                }
+            }
+        <div class="form-group">
+            <button type="submit" value="Agregar" class="btn btn-primary"><i class="bi-plus-square mr-2"></i>Agregar</button>
+            <button type="reset" value="Limpiar" class="btn btn-sm btn-outline-primary"><i class="bi-recycle mr-2"></i>Limpiar</button>
+            <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+        </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

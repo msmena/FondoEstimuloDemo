@@ -1,0 +1,239 @@
+﻿@page "{indicepagina=1}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Usuarios.IndexModel
+
+@{
+    ViewData["Title"] = "Listado - Usuarios";
+}
+
+<h2 class="text-primary">
+    Usuarios <small class="text-muted">- Listado -</small>
+</h2>
+
+<p>
+    <a asp-page="Crear" class="btn btn-outline-primary btn-sm"><i class="bi-plus-square mr-2"></i>Nuevo registro</a>
+</p>
+
+<div class="card border-secondary p-1" style="font-size: small">
+    <div class="card-header">
+        <a href="#card-body-cb1" data-toggle="collapse" class="card-link">
+            <i class="bi-arrow-down-up"></i>
+            Filtros
+        </a>
+    </div>
+    <div id="card-body-cb1" class="card-body collapse">
+        <form asp-page="./Listado" method="get">
+            <fieldset>
+                <input type="hidden" name="ordencampo" value="@Model.OrdenCampo" />
+                <div class="form-group row p-0 m-0 pt-2">
+                    <label class="col-form-label col-sm-2">Usuario: </label>
+                    <div class="col-sm-4">
+                        <input asp-for="FNombre" placeholder="Texto" class="form-control-sm" />
+                    </div>
+                    <label class="col-form-label col-sm-2">Email: </label>
+                    <div class="col-sm-4">
+                        <input asp-for="FEmail" placeholder="usuario@dominio.extension" class="form-control-sm" />
+                    </div>
+                </div>
+                <div class="form-group row p-0 m-0 mt-2">
+                    <div class="col-12 text-right">
+                        <button type="submit" value="Aplicar" class="btn btn-primary mr-sm-2">
+                            <i class="bi-funnel mr-2"></i>Aplicar
+                        </button>
+                        <a asp-page="./Listado" class="btn btn-outline-primary btn-sm mr-sm-2">
+                            <i class="bi-recycle mr-2"></i>Limpiar
+                        </a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<br />
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <caption>Listado de agentes</caption>
+        <thead class="thead-light text-center">
+            <tr>
+                <th>
+                    @{
+                        string ordenCampoNombre = !String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Equals("NormalizedUserName") ? "NormalizedUserName_desc" : "NormalizedUserName";
+                    }
+                    <a asp-page="./Listado" class="text-decoration-none"
+                       asp-route-ordencampo="@ordenCampoNombre"
+                       asp-route-fnombre="@Model.FNombre"
+                       asp-route-femail="@Model.FEmail">
+                        Usuario
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("NormalizedUserName"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <i class="bi-sort-down-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="bi-sort-down"></i>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @{
+                        string ordenCampoEmail = !String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Equals("NormalizedEmail") ? "NormalizedEmail_desc" : "NormalizedEmail";
+                    }
+                    <a asp-page="./Listado" class="text-decoration-none"
+                       asp-route-ordencampo="@ordenCampoEmail"
+                       asp-route-fnombre="@Model.FNombre"
+                       asp-route-femail="@Model.FEmail">
+                        Email
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("NormalizedEmail"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <i class="bi-sort-down-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="bi-sort-down"></i>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    Rol
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Usuarios.Count<FondoEstimulo.Models.Aplicacion.Usuario>() > 0)
+            {
+                foreach (FondoEstimulo.Models.Aplicacion.Usuario item in Model.Usuarios)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @if (item.UserRoles.Count > 0)
+                            {
+                                <label>Admininistrador</label>
+                            }
+                        </td>
+                        <td class="text-center align-middle">
+                            <div class="btn-group" style="border-radius:0">
+                                <a class="btn btn-outline-primary btn-sm"
+                                   asp-page="./Detalles"
+                                   asp-route-id="@item.Id"
+                                   data-toggle="tooltip" title="Detalles">
+                                    <i class="bi-journal-text" style="font-size: 1rem;"></i>
+                                </a>
+                                <a class="btn btn-outline-primary btn-sm"
+                                   asp-page="./Editar"
+                                   asp-route-id="@item.Id"
+                                   data-toggle="tooltip" title="Editar">
+                                    <i class="bi-journal-check" style="font-size: 1rem;"></i>
+                                </a>
+                            </div>
+                            <a class="btn btn-outline-danger btn-sm"
+                               asp-page="./Eliminar"
+                               asp-route-id="@item.Id"
+                               data-toggle="tooltip" title="Eliminar">
+                                <i class="bi-journal-x" style="font-size: 1rem;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="text-center">
+                    <td colspan="6">No se encontraron registros.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@{
+    var prevDisabled = !Model.Usuarios.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Usuarios.HasNextPage ? "disabled" : "";
+}
+
+<div class="row p-0 m-0 align-items-md-center">
+    <div class="col pl-2 small text-muted">
+        <p>
+            Mostrando @Model.Usuarios.RecordsFrom hasta @Model.Usuarios.RecordsTo de un total de
+            @Model.Usuarios.RecordsTotal registros
+        </p>
+    </div>
+    <div class="col text-center align-middle">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @prevDisabled">
+                <a asp-page="./Listado"
+                   class="page-link"
+                   asp-route-indicepagina="1"
+                   asp-route-fnombre="@Model.FNombre"
+                   asp-route-ordencampo="@Model.OrdenCampo" data-toggle="tooltip" title="Primero">
+                    <i class="bi-chevron-double-left"></i>
+                </a>
+            </li>
+            <li class="page-item @prevDisabled">
+                <a asp-page="./Listado"
+                   class="page-link"
+                   asp-route-indicepagina="@(Model.Usuarios.PageIndex - 1)"
+                   asp-route-fnombre="@Model.FNombre"
+                   asp-route-ordencampo="@Model.OrdenCampo" data-toggle="tooltip" title="Anterior">
+                    <i class="bi-chevron-left"></i>
+                </a>
+            </li>
+
+            @{ for (int i = Model.Usuarios.StartPage; i <= Model.Usuarios.EndPage; i++)
+               {
+                    if (Model.Usuarios.PageIndex == i)
+                    {
+                        <li class="page-item active">
+                            <a asp-page="./Listado" class="btn-sm page-link"
+                               asp-route-indicepagina=@i
+                               asp-route-fnombre="@Model.FNombre"
+                               asp-route-ordencampo="@Model.OrdenCampo">
+                                @i
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a asp-page="./Listado" class="btn-sm page-link"
+                               asp-route-indicepagina=@i
+                               asp-route-fnombre="@Model.FNombre"
+                               asp-route-ordencampo="@Model.OrdenCampo">
+                                @i
+                            </a>
+                        </li>
+                    }
+               }
+            }
+            <li class="page-item @nextDisabled">
+                <a asp-page="./Listado"
+                   class="page-link"
+                   asp-route-indicepagina="@(Model.Usuarios.PageIndex + 1)"
+                   asp-route-fnombre="@Model.FNombre"
+                   asp-route-ordencampo="@Model.OrdenCampo" data-toggle="tooltip" title="Siguiente">
+                    <i class="bi-chevron-right"></i>
+                </a>
+            </li>
+            <li class="page-item @nextDisabled">
+                <a asp-page="./Listado"
+                   class="page-link"
+                   asp-route-indicepagina="@Model.Usuarios.TotalPages"
+                   asp-route-fnombre="@Model.FNombre"
+                   asp-route-ordencampo="@Model.OrdenCampo" data-toggle="tooltip" title="Ultimo">
+                    <i class="bi-chevron-double-right"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

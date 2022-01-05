@@ -1,0 +1,46 @@
+﻿@page "{id}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Usuarios.DeleteModel
+
+@{
+    ViewData["Title"] = "Eliminar - Usuarios";
+}
+
+<h2 class="text-primary">
+    Usuarios
+    <small class="text-muted">- Eliminar -</small>
+</h2>
+<label>¿Seguro que desea eliminar este registro?</label>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Usuario.User):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Usuario.User)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Usuario.Email):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Usuario.Email)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Usuario.Rol):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Usuario.Rol)
+        </dd>
+    </dl>
+    @{
+        if (!String.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <p class="alert alert-danger">@Model.ErrorMessage</p>
+        }
+    }
+<form method="post">
+    <input type="hidden" asp-for="Usuario.UserID" />
+    <button value="Eliminar" class="btn btn-danger"><i class="bi-trash mr-2"></i>Eliminar</button>
+    <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+</form>
+</div>

@@ -1,0 +1,44 @@
+﻿@page
+@model FondoEstimulo.Areas.Aplicacion.Pages.Agentes.ImportarModel
+
+@{
+    ViewData["Title"] = "Importar - Agentes";
+}
+
+<h2 class="text-primary">
+    Agentes <small class="text-muted">- Importar -</small>
+</h2>
+<br />
+<div class="row">
+    <div class="col">
+        @{
+            if (!String.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <p class="alert alert-danger">@Model.ErrorMessage</p>
+            }
+
+            if (!String.IsNullOrEmpty(Model.RegistrosModificadosMessage))
+            {
+                <p class="alert alert-info">@Model.RegistrosModificadosMessage</p>
+            }
+        }
+
+    <form enctype="multipart/form-data" method="post">
+        <div class="form-group row">
+            <label asp-for="@Model.FormFile" class="control-label col-sm-3">
+                @Html.DisplayNameFor(model => model.FormFile):
+            </label>
+            <div class="col-sm-9">
+                <input type="file" asp-for="@Model.FormFile" class="form-control" accept=".csv" />
+                <span asp-validation-for="@Model.FormFile" class="text-danger"></span>
+            </div>
+        </div>
+        <button asp-page-handler="Upload" type="submit" class="btn btn-primary">
+            <i class="bi-cloud-arrow-up mr-2"></i>Importar
+        </button>
+        <a asp-page="./Comunes/Listado" class="btn btn-sm btn-outline-primary">
+            <i class="bi-box-arrow-in-left mr-2"></i>Volver al listado
+        </a>
+    </form>
+    </div>
+</div>

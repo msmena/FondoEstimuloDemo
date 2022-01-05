@@ -1,0 +1,258 @@
+﻿@page "{indicepagina=1}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Agentes.Funcionarios.IndexModel
+
+@{
+    ViewData["Title"] = "Listado - Agentes";
+}
+
+<h2 class="text-primary">
+    Agentes Funcionarios <small class="text-muted">- Listado -</small>
+</h2>
+<p>
+    <a asp-page="Crear" class="btn btn-outline-primary btn-sm"><i class="bi-plus-square mr-2"></i>Nuevo registro</a>
+    <a asp-page="/Agentes/Importar" class="btn btn-outline-primary btn-sm"><i class="bi-cloud-arrow-up mr-2"></i>Importar</a>
+</p>
+
+<div class="card border-secondary p-1" style="font-size: small">
+    <div class="card-header">
+        <a href="#card-body-cb1" data-toggle="collapse" class="card-link">
+            <i class="bi-arrow-down-up"></i>
+            Filtros
+        </a>
+    </div>
+    <div id="card-body-cb1" class="card-body collapse">
+        <form asp-page="./Listado" method="get">
+            <fieldset>
+                <input type="hidden" name="ordenCampo" value="@Model.OrdenCampo" />
+                <div class="form-group row p-0 m-0 pt-2">
+                    <label class="col-form-label col-sm-2"> @Html.DisplayNameFor(model => model.Agentes[0].DNI): </label>
+                    <div class="col-sm-4">
+                        <input asp-for="FDNI" placeholder="123456" class="form-control-sm" />
+                    </div>
+                    <label class="col-form-label col-sm-2">@Html.DisplayNameFor(model => model.Agentes[0].Nombre): </label>
+                    <div class="col-sm-4">
+                        <input asp-for="FNombre" placeholder="Texto" class="form-control-sm" />
+                    </div>
+                </div>
+                <div class="form-group row p-0 m-0">
+                    <label class="col-form-label col-sm-2">@Html.DisplayNameFor(model => model.Agentes[0].Escalafon.Apartado): </label>
+                    <div class="col-sm-4">
+                        <select asp-for="FApartado" asp-items="Model.Apartados" class="form-control-sm">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <label class="col-form-label col-sm-2">@Html.DisplayNameFor(model => model.Agentes[0].Escalafon.Grupo): </label>
+                    <div class="col-sm-4">
+                        <select asp-for="FGrupo" asp-items="Model.Grupos" class="form-control-sm">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row p-0 m-0 mt-2">
+                    <div class="col-12 text-right">
+                        <button type="submit" value="Aplicar" class="btn btn-primary mr-sm-2">
+                            <i class="bi-funnel mr-2"></i>Aplicar
+                        </button>
+                        <a asp-page="./Listado" class="btn btn-outline-primary btn-sm mr-sm-2">
+                            <i class="bi-recycle mr-2"></i>Limpiar
+                        </a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<br />
+@{
+    string sDNI = Model.FDNI.HasValue ? Model.FDNI.Value.ToString() : "";
+    string sGrupo = Model.FGrupo.HasValue ? Model.FGrupo.Value.ToString() : "";
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <caption>Listado de agentes</caption>
+        <thead class="thead-light text-center">
+            <tr>
+                <th>
+                    @{
+                        string ordenCampoDNI = !String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Equals("DNI") ? "DNI_desc" : "DNI";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoDNI" class="text-decoration-none" asp-route-fdni="@sDNI"
+                       asp-route-fnombre="@Model.FNombre" asp-route-fapartado="@Model.FApartado" asp-route-fgrupo="@sGrupo">
+                        @Html.DisplayNameFor(model => model.Agentes[0].DNI)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("DNI"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <i class="bi-sort-down-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="bi-sort-down"></i>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agentes[0].AgenteIDExterno)
+                </th>
+                <th>
+                    @{
+                        string ordenCampoNombre = !String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Equals("Nombre") ? "Nombre_desc" : "Nombre";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoNombre" class="text-decoration-none" asp-route-fdni="@sDNI"
+                       asp-route-fnombre="@Model.FNombre" asp-route-fapartado="@Model.FApartado" asp-route-fgrupo="@sGrupo">
+                        @Html.DisplayNameFor(model => model.Agentes[0].Nombre)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("Nombre"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <i class="bi-sort-down-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="bi-sort-down"></i>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @{
+                        string ordenCampoEscalafon = !String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Equals("Escalafon__EscalafonIdentificador") ? "Escalafon__EscalafonIdentificador_desc" : "Escalafon__EscalafonIdentificador";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoEscalafon" class="text-decoration-none" asp-route-fdni="@sDNI"
+                       asp-route-fnombre="@Model.FNombre" asp-route-fapartado="@Model.FApartado" asp-route-fgrupo="@sGrupo">
+                        @Html.DisplayNameFor(model => model.Agentes[0].Escalafon.EscalafonApartadoGrupoIdentificador)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("Escalafon__EscalafonIdentificador"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <i class="bi-sort-down-alt"></i>
+                            }
+                            else
+                            {
+                                <i class="bi-sort-down"></i>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>Antiguedad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Agentes.Count > 0)
+            {
+                foreach (var item in Model.Agentes)
+                {
+            <tr>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.DNI)
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.AgenteIDExterno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Escalafon.EscalafonApartadoGrupoIdentificador)
+                </td>
+                <td class="text-right">
+                    @Math.Floor(new System.DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).Subtract(item.InicioActividades).TotalDays / 365).ToString()
+                </td>
+                <td class="text-center align-middle">
+                    <div class="btn-group" style="border-radius:0">
+                        <a asp-page="./Detalles" asp-route-id="@item.AgenteID" class="btn btn-outline-primary btn-sm"
+                           data-toggle="tooltip" title="Detalles">
+                            <i class="bi-journal-text" style="font-size: 1rem;"></i>
+                        </a>
+                        <a asp-page="./Editar" asp-route-id="@item.AgenteID" class="btn btn-outline-primary btn-sm"
+                           data-toggle="tooltip" title="Editar">
+                            <i class="bi-journal-check" style="font-size: 1rem;"></i>
+                        </a>
+                    </div>
+                    <a asp-page="./Eliminar" asp-route-id="@item.AgenteID" class="btn btn-outline-danger btn-sm"
+                       data-toggle="tooltip" title="Eliminar">
+                        <i class="bi-journal-x" style="font-size: 1rem;"></i>
+                    </a>
+                </td>
+            </tr>
+                }
+            }
+            else
+            {
+                <tr class="text-center">
+                    <td colspan="6">No se encontraron registros.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@{
+    var prevDisabled = !Model.Agentes.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Agentes.HasNextPage ? "disabled" : "";
+}
+
+<div class="row p-0 m-0 align-items-md-center">
+    <div class="col pl-2 small text-muted">
+        <p>Mostrando @Model.Agentes.RecordsFrom hasta @Model.Agentes.RecordsTo de un total de @Model.Agentes.RecordsTotal registros</p>
+    </div>
+    <div class="col text-center align-middle">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @prevDisabled">
+                <a asp-page="./Listado" asp-route-indicePagina="1" asp-route-fdni="@sDNI"
+                   asp-route-fnombre="@Model.FNombre" asp-route-fapartado="@Model.FApartado" asp-route-fgrupo="@sGrupo"
+                   class="page-link" asp-route-OrdenCampo="@Model.OrdenCampo" data-toggle="tooltip" title="Primero">
+                    <i class="bi-chevron-double-left"></i>
+                </a>
+            </li>
+            <li class="page-item @prevDisabled">
+                <a asp-page="./Listado" asp-route-indicePagina="@(Model.Agentes.PageIndex - 1)" asp-route-fdni="@sDNI"
+                   asp-route-fnombre="@Model.FNombre" asp-route-fapartado="@Model.FApartado" asp-route-fgrupo="@sGrupo"
+                   class="page-link" asp-route-OrdenCampo="@Model.OrdenCampo" data-toggle="tooltip" title="Anterior">
+                    <i class="bi-chevron-left"></i>
+                </a>
+            </li>
+
+            @{ for (int i = Model.Agentes.StartPage; i <= Model.Agentes.EndPage; i++)
+                {
+                    if (Model.Agentes.PageIndex == i)
+                    {
+                        <li class="page-item active">
+                            <a asp-page="./Listado" class="btn-sm page-link" asp-route-indicePagina=@i asp-route-fdni="@sDNI"
+                               asp-route-fnombre="@Model.FNombre" asp-route-fapartado="@Model.FApartado" asp-route-fgrupo="@sGrupo"
+                               asp-route-OrdenCampo="@Model.OrdenCampo">
+                                @i
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a asp-page="./Listado" class="btn-sm page-link" asp-route-indicePagina=@i asp-route-fdni="@sDNI"
+                               asp-route-fnombre="@Model.FNombre" asp-route-fapartado="@Model.FApartado" asp-route-fgrupo="@sGrupo"
+                               asp-route-OrdenCampo="@Model.OrdenCampo">
+                                @i
+                            </a>
+                        </li>
+                    }
+                }
+            }
+            <li class="page-item @nextDisabled">
+                <a asp-page="./Listado" asp-route-indicePagina="@(Model.Agentes.PageIndex + 1)" asp-route-fdni="@sDNI"
+                   asp-route-fnombre="@Model.FNombre" asp-route-fapartado="@Model.FApartado" asp-route-fgrupo="@sGrupo"
+                   class="page-link" asp-route-OrdenCampo="@Model.OrdenCampo" data-toggle="tooltip" title="Siguiente">
+                    <i class="bi-chevron-right"></i>
+                </a>
+            </li>
+            <li class="page-item @nextDisabled">
+                <a asp-page="./Listado" asp-route-indicePagina="@Model.Agentes.TotalPages" asp-route-fdni="@sDNI"
+                   asp-route-fnombre="@Model.FNombre" asp-route-fapartado="@Model.FApartado" asp-route-fgrupo="@sGrupo"
+                   class="page-link" asp-route-OrdenCampo="@Model.OrdenCampo" data-toggle="tooltip" title="Ultimo">
+                    <i class="bi-chevron-double-right"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

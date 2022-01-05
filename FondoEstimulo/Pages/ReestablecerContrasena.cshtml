@@ -1,0 +1,28 @@
+﻿@page
+@model FondoEstimulo.Pages.ReestablecerContrasenaModel
+@{
+    ViewData["Title"] = "Reestablecer contraseña - Usuario";
+}
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h2>
+            Usuario
+            <small class="text-muted">- Reestablecer contraseña -</small>
+        </h2>
+        <hr />
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi-check-square mr-2"></i>Confirmar</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

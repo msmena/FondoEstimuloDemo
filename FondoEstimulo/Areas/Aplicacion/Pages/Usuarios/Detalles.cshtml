@@ -1,0 +1,36 @@
+﻿@page "{id}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Usuarios.DetailsModel
+@{
+    ViewData["Title"] = "Detalle - Agentes";
+}
+<h2 class="text-primary">
+    Usuarios
+    <small class="text-muted">- Detalles -</small>
+</h2>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Usuario.User):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Usuario.User)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Usuario.Email):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Usuario.Email)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Usuario.Rol):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Usuario.Rol)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Editar" asp-route-id="@Model.Usuario.UserID" class="btn btn-primary"><i class="bi-journal-check"></i>Editar</a>
+    <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+</div>

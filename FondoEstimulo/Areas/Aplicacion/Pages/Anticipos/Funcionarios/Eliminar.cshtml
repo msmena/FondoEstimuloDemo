@@ -1,0 +1,188 @@
+﻿@page "{id:int}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Anticipos.Funcionarios.DeleteModel
+
+@{
+    ViewData["Title"] = "Eliminar - Anticipos";
+}
+
+<h2 class="text-primary">
+    Anticipos<small class="text-muted"> - Agentes funcionarios - Eliminar -</small>
+</h2>
+<label>¿Seguro que desea eliminar este registro?</label>
+<hr />
+<div>
+    @{
+        if (!String.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <p class="alert alert-danger">@Model.ErrorMessage</p>
+        }
+    }
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.Agente.DNI):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.Agente.DNI)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.Agente.AgenteIDExterno):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.Agente.AgenteIDExterno)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.Agente):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.Agente.Nombre)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.Fecha):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.Fecha)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.Periodo):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.Periodo)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.Escalafon):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.Escalafon)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.SueldoBasico):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.SueldoBasico)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.SRNoBonificableCoeficiente):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.SRNoBonificableCoeficiente)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.SRNoBonificable):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.SRNoBonificable)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.CompensacionJerarquica):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.CompensacionJerarquica)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.AdicionalRemunerativo):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.AdicionalRemunerativo)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.SubtotalBasico):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.SubtotalBasico)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.AñosAntiguedad):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.AñosAntiguedad)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.Antiguedad):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.Antiguedad)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.IncompatibilidadCoeficiente):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.IncompatibilidadCoeficiente)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.Incompatibilidad):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.Incompatibilidad)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.TituloTipo):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.TituloTipo)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.TituloTipoCoeficiente):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.TituloTipoCoeficiente)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.TituloEscalafonSueldoBasico):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.TituloEscalafonSueldoBasico)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.TituloEscalafonComplementoBasico):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.TituloEscalafonComplementoBasico)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.Titulo):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.Titulo)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.SumaFijaRem):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.SumaFijaRem)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.Subtotal):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.Subtotal)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.SAC):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.SAC)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.Total):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.Total)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.FondoEstimuloCoeficiente):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.FondoEstimuloCoeficiente)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Anticipo.FondoEstimulo):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Anticipo.FondoEstimulo)
+        </dd>
+    </dl>
+    <form method="post">
+        <button value="Eliminar" class="btn btn-danger"><i class="bi-trash mr-2"></i>Eliminar</button>
+        <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+    </form>
+</div>

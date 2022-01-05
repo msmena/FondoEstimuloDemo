@@ -1,0 +1,56 @@
+﻿@page
+@model FondoEstimulo.Areas.Aplicacion.Pages.Cuenta.CambiarContrasenaModel
+@{
+    ViewData["Title"] = "Cambiar contraseña - Cuenta";
+}
+
+<h2 class="text-primary">
+    Cuenta
+    <small class="text-muted">- Cambiar contraseña -</small>
+</h2>
+<hr />
+@{
+    if (!String.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <p class="alert alert-success">@Model.StatusMessage</p>
+    }
+}
+<div class="row">
+    <div class="col">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <label asp-for="Input.ContrasenaActual" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Input.ContrasenaActual" class="form-control" />
+                    <span asp-validation-for="Input.ContrasenaActual" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Input.Contrasena" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Input.Contrasena" class="form-control" />
+                    <span asp-validation-for="Input.Contrasena" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Input.ConfirmarContrasena" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Input.ConfirmarContrasena" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmarContrasena" class="text-danger"></span>
+                </div>
+            </div>
+            @{
+                if (!String.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <p class="alert alert-danger">@Model.ErrorMessage</p>
+                }
+            }
+            <button type="submit" value="Confirmar" class="btn btn-primary"><i class="bi-check-square mr-2"></i>Confirmar</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,51 @@
+﻿@page "{id:int}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Escalafon.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalles - Escalafón";
+}
+
+<h2 class="text-primary">
+    Escalafón
+    <small class="text-muted">- Detalles -</small>
+</h2>
+
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Escalafon.Apartado):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Escalafon.Apartado)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Escalafon.Grupo):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Escalafon.Grupo)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Escalafon.SueldoBasico):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Escalafon.SueldoBasico)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Escalafon.ComplementoBasico):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Escalafon.ComplementoBasico)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Escalafon.SuplementoRemunerativo):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Escalafon.SuplementoRemunerativo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Editar" asp-route-id="@Model.Escalafon.EscalafonID" class="btn btn-primary"><i class="bi-journal-check"></i>Editar</a>
+    <a asp-page="./Listado" class="btn btn-sm btn-outline-primary"><i class="bi-box-arrow-in-left mr-2"></i>Volver al listado</a>
+</div>

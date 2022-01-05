@@ -1,0 +1,308 @@
+﻿@page "{indicepagina=1}"
+@model FondoEstimulo.Areas.Aplicacion.Pages.Escalafon.IndexModel
+
+@{
+    ViewData["Title"] = "Listado - Escalafón";
+}
+
+<h2 class="text-primary">
+    Escalafón <small class="text-muted">- Listado de Apartados y Grupos -</small>
+</h2>
+
+<p>
+    <a asp-page="Crear" class="btn btn-outline-primary btn-sm"><i class="bi-plus-square mr-2"></i>Nuevo registro</a>
+</p>
+
+<div class="card border-secondary p-1" style="font-size: small">
+    <div class="card-header">
+        <a href="#card-body-cb1" data-toggle="collapse" class="card-link">
+            <i class="bi-arrow-down-up"></i>
+            Filtros
+        </a>
+    </div>
+    <div id="card-body-cb1" class="card-body collapse">
+        <form asp-page="./Listado" method="get">
+            <fieldset>
+                <input type="hidden" asp-for="@Model.OrdenCampo" />
+                <div class="form-group row p-0 m-0 pt-2">
+                    <label class="col-form-label col-sm-2">@Html.DisplayNameFor(model => model.Escalafones[0].Apartado): </label>
+                    <div class="col-sm-2">
+                        <select asp-for="FApartado" asp-items="Model.Apartados" class="form-control-sm">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <label class="col-form-label col-sm-2">@Html.DisplayNameFor(model => model.Escalafones[0].Grupo): </label>
+                    <div class="col-sm-2">
+                        <select asp-for="FGrupo" asp-items="Model.Grupos" class="form-control-sm">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 text-right">
+                        <button type="submit" value="Aplicar" class="btn btn-primary mr-sm-2">
+                            <i class="bi-funnel mr-2"></i>Aplicar
+                        </button>
+                        <a asp-page="./Listado" class="btn btn-outline-primary btn-sm mr-sm-2">
+                            <i class="bi-recycle mr-2"></i>Limpiar
+                        </a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<br />
+@{
+    string sGrupo = Model.FGrupo.HasValue ? Model.FGrupo.Value.ToString() : "";
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <caption>Listado de apartados y grupos</caption>
+        <thead class="thead-light text-center">
+            <tr>
+                <th>
+                    @{
+                        string ordenCampoApartado = !String.IsNullOrEmpty(Model.OrdenCampo)
+                            && Model.OrdenCampo.Equals("Apartado") ? "Apartado_desc" : "Apartado";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoApartado" asp-route-fApartado="@Model.FApartado"
+                       asp-route-fGrupo="@sGrupo" class="text-decoration-none">
+                        @Html.DisplayNameFor(model => model.Escalafones[0].Apartado)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("Apartado"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <span class="badge badge-light">
+                                    <i class="bi-sort-down-alt"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-light">
+                                    <i class="bi-sort-down"></i>
+                                </span>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @{
+                        string ordenCampoGrupo = !String.IsNullOrEmpty(Model.OrdenCampo)
+                            && Model.OrdenCampo.Equals("Grupo") ? "Grupo_desc" : "Grupo";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoGrupo" asp-route-fApartado="@Model.FApartado"
+                       asp-route-fGrupo="@sGrupo" class="text-decoration-none">
+                        @Html.DisplayNameFor(model => model.Escalafones[0].Grupo)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("Grupo"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <span class="badge badge-light">
+                                    <i class="bi-sort-down-alt"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-light">
+                                    <i class="bi-sort-down"></i>
+                                </span>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @{
+                        string ordenCampoSueldoBasico = !String.IsNullOrEmpty(Model.OrdenCampo)
+                            && Model.OrdenCampo.Equals("SueldoBasico") ? "SueldoBasico_desc" : "SueldoBasico";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoSueldoBasico" asp-route-fApartado="@Model.FApartado"
+                       asp-route-fGrupo="@sGrupo" class="text-decoration-none">
+                        @Html.DisplayNameFor(model => model.Escalafones[0].SueldoBasico)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("SueldoBasico"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <span class="badge badge-light">
+                                    <i class="bi-sort-down-alt"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-light">
+                                    <i class="bi-sort-down"></i>
+                                </span>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @{
+                        string ordenCampoComplementoBasico = !String.IsNullOrEmpty(Model.OrdenCampo)
+                            && Model.OrdenCampo.Equals("ComplementoBasico") ? "ComplementoBasico_desc" : "ComplementoBasico";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoComplementoBasico" asp-route-fApartado="@Model.FApartado"
+                       asp-route-fGrupo="@sGrupo" class="text-decoration-none">
+                        @Html.DisplayNameFor(model => model.Escalafones[0].ComplementoBasico)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("ComplementoBasico"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <span class="badge badge-light">
+                                    <i class="bi-sort-down-alt"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-light">
+                                    <i class="bi-sort-down"></i>
+                                </span>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>
+                    @{
+                        string ordenCampoSuplementoRemunerativo = !String.IsNullOrEmpty(Model.OrdenCampo) &&
+                            Model.OrdenCampo.Equals("SuplementoRemunerativo") ? "SuplementoRemunerativo_desc" : "SuplementoRemunerativo";
+                    }
+                    <a asp-page="./Listado" asp-route-ordenCampo="@ordenCampoSuplementoRemunerativo"
+                       asp-route-fApartado="@Model.FApartado" asp-route-fGrupo="@sGrupo" class="text-decoration-none">
+                        @Html.DisplayNameFor(model => model.Escalafones[0].SuplementoRemunerativo)
+                        @if (!String.IsNullOrEmpty(Model.OrdenCampo) && Model.OrdenCampo.Contains("SuplementoRemunerativo"))
+                        {
+                            if (!Model.OrdenCampo.Contains("desc"))
+                            {
+                                <span class="badge badge-light">
+                                    <i class="bi-sort-down-alt"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-light">
+                                    <i class="bi-sort-down"></i>
+                                </span>
+                            }
+                        }
+                    </a>
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Escalafones.Count > 0)
+            {
+                foreach (var item in Model.Escalafones)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Apartado)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.Grupo)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.SueldoBasico)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.ComplementoBasico)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.SuplementoRemunerativo)
+                        </td>
+                        <td class="text-center align-middle">
+                            <div class="btn-group" style="border-radius:0">
+                                <a asp-page="./Detalles" asp-route-id="@item.EscalafonID" class="btn btn-outline-primary btn-sm"
+                                   data-toggle="tooltip" title="Detalles">
+                                    <i class="bi-journal-text" style="font-size: 1rem;"></i>
+                                </a>
+                                <a asp-page="./Editar" asp-route-id="@item.EscalafonID" class="btn btn-outline-primary btn-sm"
+                                   data-toggle="tooltip" title="Editar">
+                                    <i class="bi-journal-check" style="font-size: 1rem;"></i>
+                                </a>
+                            </div>
+                            <a asp-page="./Eliminar" asp-route-id="@item.EscalafonID" class="btn btn-outline-danger btn-sm"
+                               data-toggle="tooltip" title="Eliminar">
+                                <i class="bi-journal-x" style="font-size: 1rem;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="text-center">
+                    <td colspan="6">No se encontraron registros.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@{
+    var prevDisabled = !Model.Escalafones.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Escalafones.HasNextPage ? "disabled" : "";
+}
+<div class="row p-0 m-0 align-items-md-center">
+    <div class="col pl-2 small text-muted">
+        <p>
+            Mostrando @Model.Escalafones.RecordsFrom hasta @Model.Escalafones.RecordsTo de un total de
+            @Model.Escalafones.RecordsTotal registros
+        </p>
+    </div>
+    <div class="col text-center align-middle">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @prevDisabled">
+                <a asp-page="./Listado"
+                   asp-route-indicePagina=1 asp-route-ordenCampo="@Model.OrdenCampo"
+                   asp-route-fApartado="@Model.FApartado" asp-route-fGrupo="@sGrupo"
+                   class="page-link" data-toggle="tooltip" title="Primero">
+                    <i class="bi-chevron-double-left"></i>
+                </a>
+            </li>
+            <li class="page-item @prevDisabled">
+                <a asp-page="./Listado"
+                   asp-route-indicePagina="@(Model.Escalafones.PageIndex - 1)" asp-route-ordenCampo="@Model.OrdenCampo"
+                   asp-route-fApartado="@Model.FApartado" asp-route-fGrupo="@sGrupo"
+                   class="page-link" data-toggle="tooltip" title="Anterior">
+                    <i class="bi-chevron-left"></i>
+                </a>
+            </li>
+            @{ for (int i = Model.Escalafones.StartPage; i <= Model.Escalafones.EndPage; i++)
+                {
+                    if (Model.Escalafones.PageIndex == i)
+                    {
+                        <li class="page-item active">
+                            <a asp-page="./Listado" class="btn-sm page-link"
+                               asp-route-indicePagina=@i asp-route-ordenCampo="@Model.OrdenCampo"
+                               asp-route-fApartado="@Model.FApartado" asp-route-fGrupo="@sGrupo">
+                                @i
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a asp-page="./Listado" class="btn-sm page-link"
+                               asp-route-indicePagina=@i asp-route-ordenCampo="@Model.OrdenCampo"
+                               asp-route-fApartado="@Model.FApartado" asp-route-fGrupo="@sGrupo">
+                                @i
+                            </a>
+                        </li>
+                    }
+                }
+            }
+            <li class="page-item @nextDisabled">
+                <a asp-page="./Listado"
+                   asp-route-indicePagina="@(Model.Escalafones.PageIndex + 1)" asp-route-ordenCampo="@Model.OrdenCampo"
+                   asp-route-fApartado="@Model.FApartado" asp-route-fGrupo="@sGrupo" class="page-link" data-toggle="tooltip" title="Siguiente">
+                    <i class="bi-chevron-right"></i>
+                </a>
+            </li>
+            <li class="page-item @nextDisabled">
+                <a asp-page="./Listado"
+                   asp-route-indicePagina="@Model.Escalafones.TotalPages" asp-route-ordenCampo="@Model.OrdenCampo"
+                   asp-route-fApartado="@Model.FApartado" asp-route-fGrupo="@sGrupo" class="page-link" data-toggle="tooltip" title="Ultimo">
+                    <i class="bi-chevron-double-right"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
