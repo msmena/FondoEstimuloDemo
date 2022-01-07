@@ -17,6 +17,16 @@ Pequeño proyecto de implementación real en entidad gubernamental para cálculo
 * Registro de eventos en comando con libreria Serilog.
 * Uso de Entity Framework Core.
 * Separación de areas para página con permisos de autorización.
+* Notificación por email de error en la página.
+
+## Configuración
+
+* Conexión a la base de datos
+  * appsettings.json: FondoEstimuloContext: datos de la base de datos de producción
+  * appsettings.Development.json: FondoEstimuloContext: datos de la base de datos de prueba
+* Clase DbInitializer.cs: Método priado EnsureUserAdmin: configuración del email y usuario del administrador del sitio. Se enviará un email para especificación de la contraseña.
+* Clase Email.cs: configuración del servidor de envio de email, usuario, contraseña y copia a jefes de departamento.
+* Controlador Error.cshtml.cs: Método público OnGet: especificación de correo electrónico para notificación de error de página.
 
 ## Contacto
 
